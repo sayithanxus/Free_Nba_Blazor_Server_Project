@@ -19,7 +19,9 @@ Free Nba Apisi
 ---
 ## Proje Dosya Yapısı
 
-
+- **/Free_Nba_Blazor_Server_Project**
+ 
+- `README.md`
 
 
 ---
