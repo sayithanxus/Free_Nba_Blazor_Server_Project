@@ -43,4 +43,6 @@ Microsoft Visual Studio 2022 son sürümünü resmi web sitesinden Visual Studio
 
 ## İletişim
 
-Sayithan Usta     : sayit2828@hotmail.com,[Linkedin](https://www.linkedin.com/in/sayithan-usta-aa34b4202/)
+Sayithan Usta   <br>
+sayit2828@hotmail.com <br>
+[Linkedin](https://www.linkedin.com/in/sayithan-usta-aa34b4202/)
