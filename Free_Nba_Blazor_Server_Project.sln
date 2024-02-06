@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IleriWebFinalServer", "IleriWebFinalServer\IleriWebFinalServer.csproj", "{53EB6DAD-BF52-4423-9645-800915992019}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Free_Nba_Blazor_Server_Project", "IleriWebFinalServer\Free_Nba_Blazor_Server_Project.csproj", "{53EB6DAD-BF52-4423-9645-800915992019}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
