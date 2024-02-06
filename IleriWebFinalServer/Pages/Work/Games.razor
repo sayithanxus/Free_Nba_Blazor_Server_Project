@@ -1,6 +1,4 @@
 ﻿@page "/games"
-@using WEBUI.Model;
-@using WEBUI.Service.Base
 @inject IGamesService GamesService
 
 <PageTitle>Oyunlar</PageTitle>
@@ -62,8 +60,8 @@
 </div>
 
 @code {
-    private List<WEBUI.Model.Games> games = new List<WEBUI.Model.Games>();
-    private List<WEBUI.Model.Games> comboData = new List<WEBUI.Model.Games>();
+    private List<Free_Nba_Blazor_Server_Project.Model.Games> games = new List<Free_Nba_Blazor_Server_Project.Model.Games>();
+    private List<Free_Nba_Blazor_Server_Project.Model.Games> comboData = new List<Free_Nba_Blazor_Server_Project.Model.Games>();
     private string search = "";
     private int seasons = 0;
     private int teamId = 0;
@@ -89,11 +87,11 @@
             var gamesResult = await GamesService.GetSpecificGame(selectedGame);
             if (gamesResult != null)
             {
-                games = new List<WEBUI.Model.Games> { gamesResult };
+                games = new List<Free_Nba_Blazor_Server_Project.Model.Games> { gamesResult };
             }
             else
             {
-                games = new List<WEBUI.Model.Games>();
+                games = new List<Free_Nba_Blazor_Server_Project.Model.Games>();
             }
             StateHasChanged();
         }

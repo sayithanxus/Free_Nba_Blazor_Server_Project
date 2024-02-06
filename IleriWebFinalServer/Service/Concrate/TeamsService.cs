@@ -1,6 +1,6 @@
 ﻿using System;
-using WEBUI.Model;
-using WEBUI.Service.Base;
+using Free_Nba_Blazor_Server_Project.Model;
+using Free_Nba_Blazor_Server_Project.Service.Base;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.ComponentModel;
 
-namespace WEBUI.Service.Concrate
+namespace Free_Nba_Blazor_Server_Project.Service.Concrate
 {
     public class TeamsService : ITeamsService
     {

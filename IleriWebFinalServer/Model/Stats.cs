@@ -1,4 +1,4 @@
-﻿namespace WEBUI.Model
+﻿namespace Free_Nba_Blazor_Server_Project.Model
 {
 	public class Stats
 	{

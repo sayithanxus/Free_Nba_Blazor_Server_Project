@@ -3,8 +3,8 @@ using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using WEBUI.Service.Base;
-using WEBUI.Service.Concrate;
+using Free_Nba_Blazor_Server_Project.Service.Base;
+using Free_Nba_Blazor_Server_Project.Service.Concrate;
 
 var builder = WebApplication.CreateBuilder(args);
 

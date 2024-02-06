@@ -1,6 +1,6 @@
-﻿using WEBUI.Model;
+﻿using Free_Nba_Blazor_Server_Project.Model;
 
-namespace WEBUI.Service.Base
+namespace Free_Nba_Blazor_Server_Project.Service.Base
 {
 	public interface IPlayersService
 	{

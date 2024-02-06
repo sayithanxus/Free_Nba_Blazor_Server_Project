@@ -1,6 +1,4 @@
 ﻿@page "/teams"
-@using WEBUI.Model
-@using WEBUI.Service.Base
 @inject ITeamsService TeamsService
 
 <PageTitle>Takım</PageTitle>
@@ -59,8 +57,8 @@
 </div>
 
 @code {
-    private List<WEBUI.Model.Teams> teams = new List<WEBUI.Model.Teams>();
-    private List<WEBUI.Model.Teams> comboData = new List<WEBUI.Model.Teams>();
+    private List<Free_Nba_Blazor_Server_Project.Model.Teams> teams = new List<Free_Nba_Blazor_Server_Project.Model.Teams>();
+    private List<Free_Nba_Blazor_Server_Project.Model.Teams> comboData = new List<Free_Nba_Blazor_Server_Project.Model.Teams>();
     private string search = "";
     private int selectedTeam=1;
 
@@ -84,11 +82,11 @@
             var teamsResult = await TeamsService.GetSpecificTeam(selectedTeam);
             if (teamsResult != null)
             {
-                teams = new List<WEBUI.Model.Teams> { teamsResult };
+                teams = new List<Free_Nba_Blazor_Server_Project.Model.Teams> { teamsResult };
             }
             else
             {
-                teams = new List<WEBUI.Model.Teams>();
+                teams = new List<Free_Nba_Blazor_Server_Project.Model.Teams>();
             }
             StateHasChanged();
         }

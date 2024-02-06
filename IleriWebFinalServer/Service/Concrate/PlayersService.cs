@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using WEBUI.Model;
-using WEBUI.Service.Base;
-using static WEBUI.Service.Concrate.TeamsService;
+using Free_Nba_Blazor_Server_Project.Model;
+using Free_Nba_Blazor_Server_Project.Service.Base;
+using static Free_Nba_Blazor_Server_Project.Service.Concrate.TeamsService;
 
-namespace WEBUI.Service.Concrate
+namespace Free_Nba_Blazor_Server_Project.Service.Concrate
 {
 	public class PlayersService : IPlayersService
 	{

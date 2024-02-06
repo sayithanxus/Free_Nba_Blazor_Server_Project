@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using System.Data.SqlTypes;
 
-namespace WEBUI.Model
+namespace Free_Nba_Blazor_Server_Project.Model
 {
 	public class Games
 	{

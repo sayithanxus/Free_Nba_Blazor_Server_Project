@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
-using WEBUI.Model;
-using WEBUI.Service.Base;
+using Free_Nba_Blazor_Server_Project.Model;
+using Free_Nba_Blazor_Server_Project.Service.Base;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using static WEBUI.Service.Concrate.GamesService;
+using static Free_Nba_Blazor_Server_Project.Service.Concrate.GamesService;
 
-namespace WEBUI.Service.Concrate
+namespace Free_Nba_Blazor_Server_Project.Service.Concrate
 {
 	public class StatsService : IStatsService
 	{
