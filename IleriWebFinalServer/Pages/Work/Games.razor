@@ -1,0 +1,106 @@
+﻿@page "/games"
+@using WEBUI.Model;
+@using WEBUI.Service.Base
+@inject IGamesService GamesService
+
+<PageTitle>Oyunlar</PageTitle>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-3">Maç Listesi</h2>
+            <div class="col-md-7">
+                <div class="input-group mb-3">
+                    <label for="teamCombo" class="input-group-text">Takımları Seç:</label>
+                    <select id="teamCombo" class="form-select" @bind="selectedGame">
+                        @foreach (var game in comboData)
+                        {
+                            <option value="@game.id">@($"{game.home_team.name} && {game.visitor_team.name}")</option>
+                        }
+                    </select>
+                    <button class="btn btn-success ms-2" @onclick="@(() => Find())">Ara</button>
+                    <button class="btn btn-danger ms-2" @onclick="@(() => Clear())">Temizle</button>
+                </div>
+            </div>
+
+            @if (games != null && games.Any())
+            {
+                <table class="table table-striped table-bordered" style="width:100%">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Period</th>
+                            <th>Sezon</th>
+                            <th>Durum</th>
+                            <th>Ev Takım</th>
+                            <th>Ev Takımı Skor</th>
+                            <th>Diğer Takım</th>
+                            <th>Diğer Takım Skor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var game in games)
+                        {
+                            <tr>
+                                <td>@game.period</td>
+                                <td>@game.season</td>
+                                <td>@game.status</td>
+                                <td>@game.home_team.name</td>
+                                <td>@game.home_team_score</td>
+                                <td>@game.visitor_team.name</td>
+                                <td>@game.visitor_team_score</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="mt-3">Oyun bulunamadı.</p>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<WEBUI.Model.Games> games = new List<WEBUI.Model.Games>();
+    private List<WEBUI.Model.Games> comboData = new List<WEBUI.Model.Games>();
+    private string search = "";
+    private int seasons = 0;
+    private int teamId = 0;
+    private int selectedGame = 47179;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await List();
+        comboData = games.ToList();
+    }
+
+    async Task List()
+    {
+        var gamesResult = await GamesService.GetAllGamesAsync(teamId, seasons);
+        if (gamesResult != null) games = gamesResult.ToList();
+        StateHasChanged();
+    }
+
+    async Task Find()
+    {
+        if (selectedGame != 0)
+        {            
+            var gamesResult = await GamesService.GetSpecificGame(selectedGame);
+            if (gamesResult != null)
+            {
+                games = new List<WEBUI.Model.Games> { gamesResult };
+            }
+            else
+            {
+                games = new List<WEBUI.Model.Games>();
+            }
+            StateHasChanged();
+        }
+    }
+    async Task Clear()
+    {
+        selectedGame = 47179;
+        games = comboData.ToList() ;
+    }
+}

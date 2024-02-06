@@ -1,0 +1,79 @@
+﻿@page "/stats"
+@using WEBUI.Model
+@using WEBUI.Service.Base
+@inject IStatsService StatsService
+
+<PageTitle>İstatistik</PageTitle>
+<h2>Oyuncular İstatistik Listesi</h2>
+<div class="container pb-2 pt-2">
+
+	@if (stats != null && stats.Any())
+	{
+		<Accordion>
+			@foreach (var stat in stats)
+			{
+				<Collapse Visible="@stat.IsVisible">
+					<CollapseHeader>
+						<Heading Size="HeadingSize.Is5">
+							<AccordionToggle>@($"{stat.player.first_name}-{stat.player.last_name}")</AccordionToggle>
+						</Heading>
+					</CollapseHeader>
+					<CollapseBody>
+						<table class="table table-striped table-bordered">
+							<thead class="thead-dark">
+								<tr>
+									<th>Asist</th>
+									<th>Blok</th>
+									<th>Üçlük Yüzdesi</th>
+									<th>Üçlük İsabet</th>
+									<th>Saha İçi Yüzdesi</th>
+									<th>Saha İçi Deneme</th>
+									<th>Serbest Atış Yüzdesi</th>
+									<th>Serbest Atış Deneme</th>
+									<th>Oynama Süresi</th>
+									<th>Faul Sayısı</th>
+									<th>Toplam Sayı</th>
+									<th>Top Çalma</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>@stat.ast</td>
+									<td>@stat.blk</td>
+									<td>@stat.fg3_pct</td>
+									<td>@stat.fg3m</td>
+									<td>@stat.fg_pct</td>
+									<td>@stat.fga</td>
+									<td>@stat.ft_pct</td>
+									<td>@stat.fta</td>
+									<td>@stat.min</td>
+									<td>@stat.pf</td>
+									<td>@stat.pts</td>
+									<td>@stat.stl</td>
+								</tr>
+							</tbody>
+						</table>
+					</CollapseBody>
+				</Collapse>
+			}
+		</Accordion>
+
+
+	}
+</div>
+@code {
+	private List<WEBUI.Model.Stats> stats = new List<WEBUI.Model.Stats>();
+	private DateTime date;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await List();
+	}
+
+	async Task List()
+	{
+		var statsResult = await StatsService.GetAllStatsAsync();
+		if (statsResult != null) stats = statsResult.ToList();
+		StateHasChanged();
+	}
+}

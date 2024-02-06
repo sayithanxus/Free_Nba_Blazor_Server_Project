@@ -1,0 +1,70 @@
+﻿
+
+<!-- Geri kalan HTML ve C# kodları -->
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">FREE NBA</a>
+        <button title="Navigation menu" class="navbar-toggler" >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" >
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Anasayfa
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="teams">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Takımlar
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="players">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Oyuncu Listesi
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="games">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Maç Ara
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="special-games">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Özel Maç Ara
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="stats">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> İstatistikler
+            </NavLink>
+        </div> 
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="astchart">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Asist Sayısı Grafiği
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="fg3mchart">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Üçlük Sayısı Grafiği
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="fgachart">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Saha İçi Deneme Grafiği
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = false;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    
+
+}

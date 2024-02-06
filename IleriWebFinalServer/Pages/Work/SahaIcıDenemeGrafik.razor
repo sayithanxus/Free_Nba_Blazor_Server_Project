@@ -1,0 +1,153 @@
+﻿@page "/fgachart"
+@using WEBUI.Model
+@using WEBUI.Service.Base
+@inject IStatsService StatsService
+@using Blazorise.Charts
+
+<PageTitle>İstatistik</PageTitle>
+<h2>Oyuncuların Saha İçi Deneme Sayısı İstatistik Listesi</h2>
+<div class="container pb-2 pt-2">
+
+	@if (stats != null && stats.Any())
+	{
+		<BarChart @ref="barChart" TItem="int" Options="@options" />
+	}
+
+</div>
+
+@code {
+	private List<WEBUI.Model.Stats> stats = new List<WEBUI.Model.Stats>();
+	private string[] Labels;
+	private List<int> Dataset = new List<int>();
+	private List<int> Dataset2 = new List<int>();
+	private List<BlockCharts> chartDataList = new List<BlockCharts>();
+	private BlockCharts chartData = new BlockCharts();
+	BarChart<int> barChart = new BarChart<int>();
+	BarChartOptions options = new()
+		{
+			IndexAxis = "y",
+			Elements = new()
+			{
+				Bar = new()
+				{
+					BorderWidth = 2,
+				}
+			},
+			Responsive = true,
+			Plugins = new()
+			{
+				Legend = new()
+				{
+					Position = "right"
+				},
+				Title = new()
+				{
+					Display = true,
+					Text = "Chart.js Horizontal Bar Chart"
+				}
+			}
+		};
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await List();
+			await HandleRedraw();
+		}
+	}
+
+	async Task HandleRedraw()
+	{
+		await barChart.AddLabelsDatasetsAndUpdate(Labels, GetBarChartDataset(), GetBarChartDataset2());
+	}
+
+	private BarChartDataset<int> GetBarChartDataset()
+	{
+		return new()
+			{
+				Label = "# saha içi deneme sayısı",
+				Data = RandomizeData(),
+				BackgroundColor = backgroundColors,
+				BorderColor = borderColors,
+				BorderWidth = 1
+			};
+	}
+	private BarChartDataset<int> GetBarChartDataset2()
+	{
+		return new()
+			{
+				Label = "# toplam sayı",
+				Data = RandomizeData2(),
+				BackgroundColor = backgroundColors2,
+				BorderColor = borderColors,
+				BorderWidth = 1
+			};
+	}
+	List<string> backgroundColors = new List<string> { ChartColor.FromRgba(255, 99, 132, 0.2f), ChartColor.FromRgba(54, 162, 235, 0.2f), ChartColor.FromRgba(255, 206, 86, 0.2f), ChartColor.FromRgba(75, 192, 192, 0.2f), ChartColor.FromRgba(153, 102, 255, 0.2f), ChartColor.FromRgba(255, 159, 64, 0.2f) };
+	List<string> backgroundColors2 = new List<string> { ChartColor.FromRgba(255, 99, 132, 0.5f), ChartColor.FromRgba(54, 162, 235, 0.5f), ChartColor.FromRgba(255, 206, 86, 0.5f), ChartColor.FromRgba(75, 192, 192, 0.5f), ChartColor.FromRgba(153, 102, 255, 0.5f), ChartColor.FromRgba(255, 159, 64, 0.5f) };
+	List<string> borderColors = new List<string> { ChartColor.FromRgba(255, 99, 132, 1f), ChartColor.FromRgba(54, 162, 235, 1f), ChartColor.FromRgba(255, 206, 86, 1f), ChartColor.FromRgba(75, 192, 192, 1f), ChartColor.FromRgba(153, 102, 255, 1f), ChartColor.FromRgba(255, 159, 64, 1f) };
+
+	List<int> RandomizeData()
+	{
+		return Dataset;
+	}
+	List<int> RandomizeData2()
+	{
+		return Dataset2;
+	}
+
+
+	async Task List()
+	{
+		var statsResult = await StatsService.GetAllStatsAsync();
+		if (statsResult != null)
+		{
+			stats = statsResult.ToList();
+			stats = stats.OrderByDescending(x =>x.pts).ToList();
+		}
+		await ChartList();
+		StateHasChanged();
+	}
+	async Task ChartList()
+	{
+		var counter = 0;
+		foreach (var stat in stats)
+		{
+			if (stat.fga != null)
+			{
+				if (Convert.ToInt32(stat.fga) > 0)
+				{
+					counter++;
+					if (counter == 16) break;
+					chartData = new BlockCharts();
+					chartData.id = counter;
+					chartData.Name = stat.player.first_name + " " + stat.player.last_name;
+					chartData.FgaCount = Convert.ToInt32(stat.fga);
+					chartDataList.Add(chartData);
+					Dataset.Add(Convert.ToInt32(stat.fga));
+					Dataset2.Add(Convert.ToInt32(stat.pts));
+				}
+			}
+		}
+		Labels = new string[chartDataList.Count];
+		var counters = 0;
+		foreach (var stat in stats)
+		{
+
+			Labels[counters] = stat.player.first_name + " " + stat.player.last_name;
+			counters++;
+			if (counters == chartDataList.Count) break;
+		}
+	}
+
+
+
+	public class BlockCharts
+	{
+		public int id { get; set; }
+		public string Name { get; set; }
+		public int FgaCount { get; set; }
+	}
+}
+

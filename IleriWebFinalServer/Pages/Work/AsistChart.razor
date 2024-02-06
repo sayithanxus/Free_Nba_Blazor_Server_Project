@@ -1,0 +1,111 @@
+﻿@page "/astchart"
+@using WEBUI.Model
+@using WEBUI.Service.Base
+@inject IStatsService StatsService
+@using Blazorise.Charts
+
+<PageTitle>İstatistik</PageTitle>
+<h2>Oyuncular Asist Sayısı İstatistik Listesi</h2>
+<div class="container pb-2 pt-2">
+
+	@if (stats != null && stats.Any())
+	{
+		<Chart @ref="barChart" Type="ChartType.Bar" TItem="int" />
+	}
+
+</div>
+
+@code {
+	private List<WEBUI.Model.Stats> stats = new List<WEBUI.Model.Stats>();
+	private string[] Labels;
+	private List<int> Dataset = new List<int>();
+	private List<BlockCharts> chartDataList = new List<BlockCharts>();
+	private BlockCharts chartData = new BlockCharts();
+	Chart<int> barChart = new Chart<int>();
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await List();
+			await HandleRedraw();
+		}
+	}
+
+	async Task HandleRedraw()
+	{
+		await barChart.AddLabelsDatasetsAndUpdate(Labels, GetBarChartDataset());
+	}
+
+	private BarChartDataset<int> GetBarChartDataset()
+	{
+		return new()
+			{
+				Label = "# asist sayısı",
+				Data = RandomizeData(),
+				BackgroundColor = backgroundColors,
+				BorderColor = borderColors,
+				BorderWidth = 1
+			};
+	}
+
+	List<string> backgroundColors = new List<string> { ChartColor.FromRgba(255, 99, 132, 0.2f), ChartColor.FromRgba(54, 162, 235, 0.2f), ChartColor.FromRgba(255, 206, 86, 0.2f), ChartColor.FromRgba(75, 192, 192, 0.2f), ChartColor.FromRgba(153, 102, 255, 0.2f), ChartColor.FromRgba(255, 159, 64, 0.2f) };
+	List<string> borderColors = new List<string> { ChartColor.FromRgba(255, 99, 132, 1f), ChartColor.FromRgba(54, 162, 235, 1f), ChartColor.FromRgba(255, 206, 86, 1f), ChartColor.FromRgba(75, 192, 192, 1f), ChartColor.FromRgba(153, 102, 255, 1f), ChartColor.FromRgba(255, 159, 64, 1f) };
+
+	List<int> RandomizeData()
+	{
+		return Dataset;
+	}
+
+
+	async Task List()
+	{
+		var statsResult = await StatsService.GetAllStatsAsync();
+		if (statsResult != null)
+		{
+			stats = statsResult.ToList();
+			stats = stats.OrderByDescending(x => x.ast).ToList();
+		}
+		await ChartList();
+		StateHasChanged();
+	}
+	async Task ChartList()
+	{
+		var counter = 0;
+		foreach (var stat in stats)
+		{
+			if (stat.ast != null)
+			{
+				if (Convert.ToInt32(stat.ast) > 0)
+				{
+					counter++;
+					if (counter == 16) break;
+					chartData = new BlockCharts();
+					chartData.id = counter;
+					chartData.Name = stat.player.first_name + " " + stat.player.last_name;
+					chartData.AsistCount = Convert.ToInt32(stat.ast);
+					chartDataList.Add(chartData);
+					Dataset.Add(Convert.ToInt32(stat.ast));
+				}
+			}
+		}
+		Labels = new string[chartDataList.Count];
+		var counters = 0;
+		foreach (var stat in stats)
+		{
+
+			Labels[counters] = stat.player.first_name + " " + stat.player.last_name;
+			counters++;
+			if (counters == chartDataList.Count) break;
+		}
+	}
+
+
+
+	public class BlockCharts
+	{
+		public int id { get; set; }
+		public string Name { get; set; }
+		public int AsistCount { get; set; }
+	}
+}
