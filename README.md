@@ -14,7 +14,9 @@ NBA oyuncularının bilgileri çekilerek onlar hakkında temel istatistik verile
 
 .NET 7<br>
 Blazor Server App<br>
-Free Nba Apisi
+Free Nba Apisi<br>
+Newtonsoft.Json<br>
+Blazorise
 
 ---
 ## Proje Dosya Yapısı
