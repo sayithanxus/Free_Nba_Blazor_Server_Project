@@ -1,25 +1,25 @@
-# Free_Nba_Blazor_Server_Project
+#Free_Nba_Blazor_Server_Project
 
-## Proje Açıklaması
+## Project Description
 
-NBA API'sini kullanarak istatistikler ve tablolar oluşturuldu. NBA oyuncularıyla ilgili daha detaylı bilgilere erişebilirsiniz. Projede Blazor Sunucu teknolojisi kullanıldı.
-
----
-## Proje Amacı
-
-NBA oyuncularının bilgileri çekilerek onlar hakkında temel istatistik verilerine daha kolay ulaşılması sağlandı.
+Created statistics and tables using the NBA API. You can access more detailed information about NBA players. Blazor Server technology was used in the project.
 
 ---
-## Kullanılan Teknolojiler
+## Project Purpose
+
+By pulling the information of NBA players, basic statistical data about them was made easier to access.
+
+---
+## Used technologies
 
 .NET 7<br>
 Blazor Server App<br>
-Free Nba Apisi<br>
+Free Nba API<br>
 Newtonsoft.Json<br>
 Blazorise
 
 ---
-## Proje Dosya Yapısı
+## Project File Structure
 
 - **/Free_Nba_Blazor_Server_Project**
  
@@ -27,22 +27,22 @@ Blazorise
 
 
 ---
-## Kurulum
-**visual studio yüklü değilse :**
-Microsoft Visual Studio 2022 son sürümünü resmi web sitesinden Visual Studio 2022'yi indirin ve yükleyin. => [İndirme Linki](https://visualstudio.microsoft.com/tr/vs/)
+## Setup
+**If visual studio is not installed:**
+Download and install Microsoft Visual Studio 2022 latest version Visual Studio 2022 from the official website. => [Download Link](https://visualstudio.microsoft.com/tr/vs/)
 
-**Visual Studio içinde .Net Masaüstü geliştirme ve .NET 7 yüklü değilse**
-İş yüklerinde .Net Masaüstü geliştirmeyi indirebilirsiniz.Bağımsız bileşenlerden .NET 7'yi indirebilirsiniz.
+**If .Net Desktop development and .NET 7 are not installed in Visual Studio**
+You can download .Net Desktop development on workloads. You can download .NET 7 from standalone components.
 
 
 ---
-## Katkılar
+## Contributions
 
-[Api'nin çekildiği yer ](https://rapidapi.com/theapiguy/api/free-nba/)
+[Api taken from ](https://rapidapi.com/theapiguy/api/free-nba/)
 ---
 
-## İletişim
+## Communication
 
-Sayithan Usta   <br>
+Master Sayithan <br>
 sayit2828@hotmail.com <br>
 [Linkedin](https://www.linkedin.com/in/sayithan-usta-aa34b4202/)
